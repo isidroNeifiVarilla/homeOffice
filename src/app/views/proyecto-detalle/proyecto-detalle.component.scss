@@ -1,0 +1,116 @@
+.nav-link[data-toggle].collapsed:after {
+    content: " ▾";
+}
+.nav-link[data-toggle]:not(.collapsed):after {
+    content: " ▴";
+}
+a:hover {
+    color: #0b7af2;
+}
+.button{
+    margin: 13px;
+  }
+.btn-outline-secondary:hover {
+    color: #0b0a0a;
+    background-color:#007cff24;;
+    border-color: white;
+}
+.rounded-pily {
+    border-radius: 50rem !important;
+    margin: 10px;
+}
+.btn-outline-secondary:focus {
+    box-shadow: 0 0 0 .2rem rgba(244, 247, 250, 0.5);
+}
+.file-select {          
+    position: relative;
+  }
+   
+
+  elemento {
+
+    font-size: 10px;
+
+}
+.card-header:first-child {
+
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+    height: 60px;
+
+}
+.card-header:first-child {
+
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+
+}
+.file-select::before {
+    background-color: white;
+    color: rgb(7, 6, 6);
+    display: flex;            
+    border-radius: 3px;
+    content: 'Seleccionar'; /* testo por defecto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;                
+}
+   
+.file-select input[type="file"] {
+    opacity: 0;
+    width: 100%;
+    height: 16px;
+    display: inline-block;            
+}   
+.tamaño{
+  z-index: 10000;
+}
+.card-body {
+    background:#8380800f;
+}           
+li a:hover{
+  color:#000;
+  background-color:#007cff24;;              
+}
+.col-sm-4 {
+  padding: 5px;
+}  
+ .color-font{
+   color: white;
+ }
+ 
+ .table-bordered {
+  border: 1px solid #dee2e6;
+}
+.btn-size {
+  padding: .5rem 1rem;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: .3rem;
+}
+.tamaño-tabla{
+  font-size: 14px;;
+}
+#fichero{
+  display: none;
+}
+.circle{
+  display: inline-block;
+  border-radius: 50rem;
+  margin: 10px;
+  width: 150px;
+  height: 50px;
+  background-color: #0069d9;
+  cursor: pointer;
+  color: white;
+  padding: 12px;
+  font-size: 14px;
+}
+
+.contain{
+  max-width: 900px !important;
+}
+
+.card-header {
+  height: 60px;
+}

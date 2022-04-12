@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row pr-4">
+            <app-nav isSelectProyectos="true"></app-nav>
+        <div class="col bg-white rounded-lg my-4 mr-4 p-4">
+            <app-header name="Proyectos"></app-header>
+            <div class="row">
+                <div class="col-4 pt-2">
+                    <a href="/proyectos" class="no-link main py-2 px-4 medium main d-inline-block ml-3"></a>
+                </div>
+                <div class="col text-right small">
+                    <app-modal-proyecto-detalle (dataProject)="updateDataProyect($event)" id="{{id}}">
+                    </app-modal-proyecto-detalle>
+                </div>
+            </div>
+            <div class="row m-0">
+                <div class="col p-0 border b-gray rounded-lg">
+                    <div class="row m-0 bb-gray">
+                        <div class="col-7 p-0 px-3">
+                            <div class="small">
+                                <h5 class="main semibold m-0 pt-2">{{titleProject}}</h5>
+                                <span class="medium gray">Scrum Master: </span>
+                                <span class="medium main mr-4">{{scrumMaster}}</span>
+                            </div>
+                        </div>
+                        <div class="col-5 p-0 d-flex align-items-center justify-content-end js-show-attachments">
+                            <div class="d-inline-block px-4 py-1 mr-3">
+                                <button type="button" class="btn btn-outline-primary rounded-pill"  (click)="openModal2()" >
+                                <span class="semibold"><img class="icon-sidenav-item" src="../../../assets/img/unidad-compartida/google-drive.png">&nbsp;&nbsp;Unidad compartida</span></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-0 bb-gray">
+                        <app-task-collapsed id="{{id}}" titleProject="{{titleProject}}" (dataScrum)="getSM($event)">
+                            <app-spinner></app-spinner>
+                        </app-task-collapsed>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    <app-spinner></app-spinner>
+</div>
+<app-chat-button></app-chat-button>

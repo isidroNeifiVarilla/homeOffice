@@ -1,0 +1,31 @@
+
+    <div class="padding">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="">
+                    <div class="box-body">
+                        <div class="direct-chat-messages">
+                            <div class="direct-chat-msg app-mensaje" style="height: 250px; overflow:auto; padding: 0px 10px 0px 0px;" #scrollMe [scrollTop]="scrollMe.scrollHeight" id="app-mensaje">
+                                <div *ngFor="let chat of _cs.chats" [ngClass]="{'text-right': correo == chat.correo }">
+                                    <p class="box-title"style="font-size: 10px;"><img class="rounded-circle border border-light shadow w-30" style="height: 28px; width: 30px!important" src="{{chat.roomname}}"><b>{{chat.nickname}}</b></p>
+                                    <span class="badge" [ngClass]="{'badge-primary': correo == chat.correo,
+                                     'badge-secondary': correo != chat.correo}">
+                                      {{chat.message}}</span>                               
+                                </div>
+                            </div>
+                        </div>
+                        <hr width=100%>
+                    <div>
+                        <form action="#" method="post">
+                            <div class="input-group"> 
+                                <input type="text" name="mensaje" placeholder="Aa " class="form-control" [(ngModel)]="mensaje" (keyup.enter)="enviar_mensaje()">
+                                <span class="input-group-btn"><button type="button" class="btn" (click)="enviar_mensaje()">
+                                <img class="icon-sidenav-item" src="../../../assets/img/enviar.svg">
+                                </button></span> 
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

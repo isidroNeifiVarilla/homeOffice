@@ -1,0 +1,79 @@
+@import "../../../assets/style/colors";
+.bg-white {
+    background-color: $blaco !important;
+}
+.main {
+    color: $negro;
+}
+.gray {
+    color: $gris;
+}
+.medium {
+    font-family: "Montserrat Medium", sans-serif !important;
+    font-weight: 500;
+}
+.semibold {
+    font-family: "Montserrat Semibold", sans-serif !important;
+    font-weight: 600;
+}
+a, [class*=btn-], .smoth, .smoth * {
+    transition: all .3s ease;
+    cursor: pointer;
+}
+.group-form-fieldset {
+    position: relative;
+    padding-top: 10px;
+}
+.group-form-fieldset input, .group-form-fieldset select, .group-form-fieldset textarea {
+    border: solid 1px $gray;
+    width: 100%;
+    padding: 10px;
+    font-weight: 600;
+    color: $negro;
+    border-radius: 10px;
+    outline: none;
+}
+.group-form-fieldset label {
+    font-size: 12px;
+    color: $azul;
+    font-family: 'Montserrat Semibold';
+    background: $blaco;
+    position: absolute;
+    left: 20px;
+    padding: 0 10px;
+    top: 0;
+    opacity: 0;
+}
+.group-form-fieldset:hover input, .input-active,
+.group-form-fieldset:hover select, 
+.group-form-fieldset:hover textarea { border: solid 1px $azul !important; }
+
+.group-form-fieldset:active label, .label-active{ opacity: 1 !important; }
+
+.img-size{
+    width: 60% !important;
+}
+.img-size2{
+    width: 35% !important;
+}
+.border1 {
+    border-radius: 20px !important;
+}
+.border-secondary {
+    border-color: #d2d7db !important;
+}
+.mb-5, .my-5 {
+    margin-bottom: 1rem !important;
+}
+.alert-danger {
+    color: #e32a2a;
+    background-color: white !important;
+    border-color: white;
+    font-size: 12px;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #dc3545!important;
+}
+
+

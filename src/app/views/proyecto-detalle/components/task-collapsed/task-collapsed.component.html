@@ -1,0 +1,182 @@
+
+<ng-container *ngFor="let item of miarray">
+    <div class="col-12 px-3 py-3 bb-gray">
+        <div (click)="item.collapsed = !item.collapsed" [attr.aria-expanded]="!item.collapsed"
+            aria-controls="#collapse-{item.id}" class="collapsed">
+            <img src="../../assets/img/generic/chev_down_dark.svg" class="align-middle mr-2"
+                [ngClass]="item.collapsed ? 'rotate180':''">
+            <span class="align-middle semibold main">{{item.title}}</span>
+        </div>
+    </div>
+    <div id="collapse-{{item.id}}" class="collapse w-100" [@expandCollapse]="item.collapsed ? 'closed' : 'open'"
+        [ngbCollapse]="item.collapsed">
+        <ng-container *ngFor="let cards of item.task.cards">
+            <div class="row m-0 w-100 bb-gray hover-bg-muted smoth">
+                <div class="col-6 p-0 px-3 py-1 hover-show-child">
+                    <div class="d-inline-block custom-control custom-checkbox check-task">
+                        <h6></h6>
+                        <!--<template v-if="${card.laneId} == ${cards.lanes[2].id}">-->
+                        <ng-container *ngIf="cards.laneId == item.lanes[2].id;else second">
+                            <input type="checkbox" id="checkTask-{{cards.id}}"
+                                (click)="editTaskLane(cards.id,item.lanes[2].id)" class="custom-control-input" checked>
+                            <label for="checkTask-{{cards.id}}"
+                                class="custom-control-label medium main small pt-1">{{cards.title}}</label>
+                        </ng-container>
+                        <ng-template #second>
+                            <input type="checkbox" id="checkTask-{{cards.id}}"
+                                (click)="editTaskLane(cards.id,item.lanes[2].id)" class="custom-control-input">
+                            <label for="checkTask-{{cards.id}}"
+                                class="custom-control-label medium main small pt-1">{{cards.title}}</label>
+                        </ng-template>
+                    </div>
+                    <span class="js-show-details hover-content-child smoth float-right pt-2 medium main smallest"
+                        (click)="selectTask(cards.id, cards.plannedFinish,item.id,item.lanes[2].id)" data-toggle="modal" data-target="#ModalDetalle">Detalles
+                        <img src="../../../../assets/img/generic/chev_right.svg"></span>
+                </div>
+                <div class="col-3 p-0 px-3 py-1 bl-gray">
+                    <span class="medium main small">{{cards.plannedFinish}}</span>
+                </div>
+                <div class="col-3 p-0 px-3 py-1 bl-gray" id="divUser-{{cards.id}}">
+                    <ng-container *ngFor="let users of cards.assignedUsers">
+                        <div class="row"><img src="{{users.avatar}}"
+                                class="w-30px rounded-circle border border-light shadow mr-3"> <span
+                                class=" medium main small text-truncate" style="width: 60%;">{{users.fullName}}</span>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+        <div id="inputContainerTask-1567783086" class="row m-0 w-100 bb-gray hover-bg-muted smoth">
+            <div class="col-6 p-0 px-3 py-1 ">
+                <span class="gray medium small js-next-toggle" (click)="isSelect = !isSelect"
+                    [ngClass]="isSelect ? 'hide':''">Agregar tarea</span>
+                <div class="js-next-content custom-control custom-checkbox check-task custom-control-inline"
+                    [ngClass]="isSelect ? '':'hide'">
+                    <input type="checkbox" id="checkTaskNew" class="custom-control-input">
+                    <label for="checkTaskNew" class="custom-control-label medium main small pt-1"></label>
+                    <input id="inputAddTask-1567783086" type="" name="" placeholder="Escribe el nombre de la tarea"
+                        #inputTask class="input-clear border-0 small d-inline-block w-300px"
+                        (keyup.enter)="createTask($event.target.value, item.id)">
+                        
+                </div>
+            </div>
+            <div class="col-3 p-0 px-3 py-1 bl-gray">
+            </div>
+            <div class="col-3 p-0 px-3 py-1 bl-gray">
+            </div>
+        </div>
+    </div>
+    <app-spinner></app-spinner>
+</ng-container>
+
+<!-- Component: Detalles -->
+<div class="modal fade" id="ModalDetalle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="false"  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="js-content-details floating-elements bg-white rounded-lg overflow-auto h-590px shadow">
+                <div class="p-3">
+                    <div class="row">
+                        <div class="col">
+                            <div class="rounded-pill btn btn btn-outline-green medium px-3 py-2 d-inline-block smallest"
+                                (click)="editTaskLaneButton()">
+                                <svg width="16.785" height="12.575" viewBox="0 0 16.785 12.575">
+                                    <path
+                                        d="M9,16.2,5.5,12.7a.99.99,0,1,0-1.4,1.4l4.19,4.19a1,1,0,0,0,1.41,0L20.3,7.7a.99.99,0,0,0-1.4-1.4Z"
+                                        transform="translate(-3.807 -6.007)" fill="#69e092" />
+                                </svg>
+                                <span class="ml-2 semibold">Marcar como finalizada</span>
+                            </div> 
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-10 col-padding">
+                                    <!--<img class="js-show-details" (click)="deletetask()" src="../../../../assets/img/eliminar2.png">-->
+                                </div>
+                                <div class="col-2">
+                                    <img class="js-show-details"  data-dismiss="modal" aria-label="Close" (click)="editDetallesTask()" src="../../../../assets/img/generic/tab.svg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-0 py-3">
+                        <div class="semibold main semibold">{{titleTask}}</div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <span class="gray small">Responsable</span>
+                        </div>
+                        <div class="col">
+                            <!--  <select name="inputUsuarios" multiple="multiple" style="width:100%"  class="form-control select-usuarios">
+                            </select> -->
+                            <ng-select class="" bindLabel="name" placeholder="" appendTo="body" multiple="true" [searchable]="true"
+                                [clearable]="true" [(ngModel)]="selected">
+                                <ng-option [value]="item.id" [disabled]="item.disabled" *ngFor="let item of items">
+                                    <img src="{{item.image}}" class="w-30px rounded-circle border border-light shadow mr-3" />
+                                    {{item.name}}
+                                </ng-option>
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <span class="gray small">Fecha de entrega</span>
+                        </div>
+                        <div class="col">
+                            <span class="semibold main small">{{dateTask}}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <span class="gray small">Proyectos</span>
+                        </div>
+                        <div class="col">
+                            <span class="medium main small"><span
+                                    class="pointer-red rounded-circle d-inline-block mr-2"></span>{{titleProject}}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-3">
+                            <span class="gray small">Descripci&oacute;n</span>
+                        </div>
+                        <div class="col">
+                            <div class="group-form-fieldset smoth mb-3">
+                                <label class="js-mat-label" (click)="isDetalleControl()">Detalles</label>
+                                <angular-editor [(ngModel)]="descriptionTask" [config]="config"></angular-editor>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 overflow-auto" id="contentTask">
+                    <ng-container *ngFor="let item of dataComments">
+                        <div class="bg-muted mb-1 px-3 py-2">
+                            <img class="w-20px rounded-circle border border-light shadow" src="{{avatarG}}">
+                            <span class="medium main small ">{{item.user}} realiz&oacute; un comentario</span>&nbsp;<span
+                                class="gray small">{{item.fecha}}</span>
+                            <div name="descriptionTask" ngDefaultControl class="gray small pl-4" [innerHTML]="item.description">
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="row m-0 pb-3 bg-muted">
+                    <div class="col-1">
+                        <img class="w-20px rounded-circle border border-light shadow" src="{{avatarG}}">
+                    </div>
+                    <div class="col pl-0">
+                        <div class="group-form-fieldset smoth w-auto">
+                            <textarea class="js-mat-input small text-comments-task" [(ngModel)]="comentario"
+                                placeholder="Realiza una pregunta o comenta una actualizaci&oacute;n" rows="2"
+                                (keyup.enter)="addComment($event.target.value)"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-5 p-0 d-flex align-items-center justify-content-end js-show-attachments">
+                        <div class="rounded-pill btn btn-primary d-inline-block px-4 py-1 mr-3"
+                            (click)="addComment($event.target.value)">
+                            <span class="semibold">Comentare</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div>
+<app-spinner></app-spinner>

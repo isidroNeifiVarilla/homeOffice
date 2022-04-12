@@ -1,0 +1,163 @@
+<ng-template #contenido let-modal>
+    <div class="modal-content border-0 px-2">
+        <div class="modal-header">
+            <h4 class="modal-title">Nuevo Proyecto</h4>
+            <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                <span aria-hidden="true"><img src="../../assets/img/generic/close.svg"></span>
+            </button>
+        </div> 
+    <form [formGroup]="proyectForm" (ngSubmit)="onProyect(proyectForm.value)">
+        <div class="modal-body">  
+            <div class="row">
+                <div class="col-6">
+                    <div class="group-form-fieldset smoth mb-3">
+                        <label class="js-mat-label">Nombre del proyecto</label>
+                        <input class="js-mat-input" type="" formControlName="title" placeholder="Nombre del proyecto">
+                    </div>
+                    <div class="row m-0">
+                        <div class="col p-0">
+                            <div class="group-form-fieldset smoth mb-3">
+                                <label class="js-mat-label">Fecha inicio</label>
+                                <input class="js-mat-input" type="" name="fechaInicio" placeholder="Fecha de inicio">
+                            </div>	
+                        </div>
+                        <div class="col p-0 pl-4">
+                            <div class="group-form-fieldset smoth mb-3">
+                                <label class="js-mat-label">Prioridad</label>
+                                <select class="js-mat-input">
+                                    <option disabled selected>Prioridad</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                </select>		
+                            </div>	
+                        </div>
+                    </div>
+                    <div class="group-form-fieldset smoth mb-3">
+                        <label class="js-mat-label">Unidad de negocio</label>
+                        <select class="js-mat-input">
+                            <option disabled selected>Unidad de negocio</option>
+                            <option>Totalplay Empresarial</option>
+                            <option>Totalplay Empresarial</option>
+                            <option>Totalplay Empresarial</option>
+                        </select>		
+                    </div>
+                    <div class="group-form-fieldset smoth mb-3">
+                        <label class="js-mat-label">ORC</label>
+                        <input class="js-mat-input" type="" name="ORC" placeholder="ORC">
+                    </div>
+                    <div class="group-form-fieldset smoth mb-3">
+                        <label class="js-mat-label">Descripci&oacute;n</label>
+                        <textarea class="js-mat-input" placeholder="Descripci&oacute;n" rows="4" formControlName="description"></textarea>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="border b-gray rounded-lg h-100">
+                        <div class="row m-0 p-3 pb-2 bb-gray">
+                            <div class="col p-0 ">
+                                <h6 class="semibold main">Project Manager</h6>
+                                <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_user_1.png">
+                                <span class="small medium main">Abril L&oacute;pez</span>
+                            </div>
+                            <div class="col p-0">
+                                <span class="blue btn p-0 float-right semibold small">Cambiar</span>
+                            </div>
+                        </div>
+                        <div class="row m-0 p-3 pb-2 ">
+                            <div class="col p-0">
+                                <div class="semibold main mb-3">Equipo de trabajo</div>
+                                <div class="h-300px overflow-auto">
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem1">
+                                        <label class="custom-control-label semibold main small" for="teamItem1">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_1.png">
+                                            Karen M
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem2">
+                                        <label class="custom-control-label semibold main small" for="teamItem2">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_2.png">
+                                            Deysi P
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem3">
+                                        <label class="custom-control-label semibold main small" for="teamItem3">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_3.png">
+                                            Beto L
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem4">
+                                        <label class="custom-control-label semibold main small" for="teamItem4">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_4.png">
+                                            Raul C
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem5">
+                                        <label class="custom-control-label semibold main small" for="teamItem5">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_5.png">
+                                            Juan Carlos
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem6">
+                                        <label class="custom-control-label semibold main small" for="teamItem6">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_6.png">
+                                            Reynaldo E
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem7">
+                                        <label class="custom-control-label semibold main small" for="teamItem7">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_7.png">
+                                            Rodrigo O
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem8">
+                                        <label class="custom-control-label semibold main small" for="teamItem8">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_8.png">
+                                            Arturo C
+                                        </label>
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem9">
+                                        <label class="custom-control-label semibold main small" for="teamItem9">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_9.png">
+                                            Brianda H
+                                        </label>
+                                    </div>	
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem10">
+                                        <label class="custom-control-label semibold main small" for="teamItem10">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_1.png">
+                                            Karen R
+                                        </label>
+                                    </div>	
+                                    <div class="custom-control custom-checkbox mb-1">
+                                        <input type="checkbox" class="custom-control-input" id="teamItem11">
+                                        <label class="custom-control-label semibold main small" for="teamItem11">
+                                            <img class="w-30px rounded-circle border border-light shadow-sm" src="/resources/assets/img/test/test_team_item_2.png">
+                                            Juan Carlos H
+                                        </label>
+                                    </div>											
+                                </div>         
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="modal-footer">
+            <button type="button" class="blue semibold btn" (click)="modal.dismiss()">Cancelar</button>
+            <button type="submit" class="btn btn-primary bg-blue rounded-pill" >Crear Proyecto</button>    
+        </div>
+    </form>
+    </div>
+</ng-template>
+<app-spinner></app-spinner>
+<button type="button" class="rounded-pill btn btn-primary bg-blue medium px-3 d-inline-block" (click)="openLG(contenido)">Nuevo Proyecto</button>

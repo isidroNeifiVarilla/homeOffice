@@ -1,0 +1,31 @@
+<div class="border border-secondary border1 col-11 border1 col-md-5 col-lg-4 col-xxl-3 mx-auto mt-5 pt-5 p-4 bg-white rounded-lg p-4">
+    <img class="d-block mx-auto mb-5 img-size2" src="../../assets/img/totalplay/totalplay.svg">
+    <hr width=100%>
+    <img class="d-block mx-auto mb-5 img-size" src="../../assets/img/planview1.png">
+    <p class="h3 semibold main mb-3 " align="center">Cuenta de PlanView</p>
+    <p class="medium gray mb-3" align="center">Ingresa tu usuario y contraseña de LeanKit</p>
+    <form [formGroup]="loginForm"  (ngSubmit)="onLogin(loginForm.value)" >
+        <div class="group-form-fieldset smoth mb-3 form-group">
+            <label class="js-mat-label">Correo</label>
+            <input class="js-mat-input" type="" name="username" formControlName="username" 
+                placeholder="Correo electr&oacute;nico"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }">
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                <div *ngIf="f.username.errors.required">Por favor, ingresa tu correo electr&oacute;nico</div>
+            </div>
+        </div>
+        <div class="group-form-fieldset smoth mb-3 form-group">
+            <label class="js-mat-label">Contrase&ntilde;a</label>
+            <input class="js-mat-input" type="password" name="password" formControlName="password"
+                placeholder="Contrase&ntilde;a" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+               <div *ngIf="f.password.errors.required">Por favor, ingresa tu contraseña</div>
+            </div>
+        </div>
+        <p *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}<p>
+        <div class="text-center mb-3">
+            <button type="submit" class="rounded-pill btn btn-primary bg-blue medium px-5 d-inline-block">Iniciar
+                sesi&oacute;n</button>
+        </div>
+    </form>
+</div>
+<app-spinner></app-spinner>

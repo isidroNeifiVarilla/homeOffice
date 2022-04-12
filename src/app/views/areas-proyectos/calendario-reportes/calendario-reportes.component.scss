@@ -1,0 +1,44 @@
+h3 {
+    margin: 0 0 10px;
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+    padding: 15px;
+  }
+
+
+  .col-4 {
+    padding: 10px 0px 0px 0px;
+}
+
+.border-light {
+    border-color: #e3e5e7!important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color:  rgba(72, 113, 248, 0.068);
+  }
+
+  input:focus, select:focus, select, input.form-control:focus {
+
+	outline:none !important;
+
+	outline-width: 0 !important;
+
+	box-shadow: none;
+
+	-moz-box-shadow: none;
+
+	-webkit-box-shadow: none;
+
+}
+
+.btn-circle {
+    width: 36px;
+    height: 36px;
+    padding: 7px 10px;
+    border-radius: 25px;
+    font-size: 10px;
+    text-align: center;
+}

@@ -1,0 +1,525 @@
+<div class="container-fluid">
+    <div class="row pr-4">
+        <app-nav isSelectAreas="true"></app-nav>
+        <div class="col bg-white rounded-lg my-4 mr-4 p-4">
+            <header class="row">
+                <div class="col-6">
+                    <h1 class="main h3 semibold m-0"> Reportes </h1>
+                    <p class="main">Hoy es {{day}} de {{mon}} {{year}} </p>
+                </div>
+                <div class="col text-right">
+                    <div class="position-relative d-inline-block" ngbDropdown #menuSearch="ngbDropdown">
+                        <input type="text" class="input-search form-control d-inline-block mr-2" placeholder="Search..." name="filterUser" [(ngModel)]="filterUser">
+                        <img class="icon-search" src="../../../assets/img/generic/search.svg">
+                    </div>
+                    <div class="position-relative d-inline-block ml-1" ngbDropdown>
+                        <img class="hover-b-blue smoth rounded-circle border dropdown-toggle w-30" ngbDropdownToggle id="navbarDropdown2" aria-haspopup="true" aria-expanded="false" src="{{avatarG}}">
+                        <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="js-fade-content position-absolute bg-white p-3 pl-2 zi-1 rounded-lg border b-gray shadow r-0 mt-1 dropdown-menu dropdown-menu-right">
+                            <a ngbDropdownItem href="mis-datos" class="d-block small semibold no-link mb-2 main">Mi Perfil</a>
+                            <!--<a ngbDropdownItem href="organigrama" class="d-block small semibold no-link main">Organigrama</a>-->
+                            <a ngbDropdownItem target="_blanck" href="https://api.whatsapp.com/send?phone=+5215515798000&text=Hola%20necesito%20soporte%20con%20mi%20homeoffice" class="d-block small semibold mb-2 no-link main">Ayuda</a>
+                            <a ngbDropdownItem class="d-block small semibold no-link red" (click)="logout()">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <div class="rounded-lg ho-general">
+                <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-tabs d-flex justify-content-end" id="nav-tab" role="tablist">
+                    <li [ngbNavItem]="1">
+                        <ng-template ngbNavContent>
+                            <div id="accordion" class="rounded-lg px-2 mb-4" id="accordionHO" *ngFor="let area of areas; let i = index">
+
+                                <!--HO SEMANAL-->
+                                <div class="card">
+                                    <div class="card-header small" id="i">
+                                        <a class="btn btn-linkk" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            <img src="../../assets/img/generic/chev_down_dark.svg" class="align-middle mr-2">
+                                            <b>HO Semanal</b>
+                                        </a>
+                                        <br>
+                                        <td>
+                                            <span style="font-size: 14px;" class="medium gray">Nombre del responsable: </span>
+                                            <span style="font-size: 14px;" class="medium main">{{area?.responsable_Name }}</span>
+                                        </td>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="i" data-parent="#accordionHO">
+                                        <div class="card-body">
+                                            <table class="table table-bordered letra table-responsive table-hover">
+                                                <tbody>
+                                                    <tr *ngFor="let item of area?.usuarios | userSearch:filterUser row">
+                                                        <td class="col-sm-6"><img src="../../../../assets/img/generic/chev_right.svg">{{item.name.stringValue}} {{item.apellidoMaterno.stringValue}} {{item.apellidoPaterno.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.email.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.idempleado.integerValue}}</td>
+                                                        <td class="col-sm-4">
+                                                            <div class="d-flex justify-content-end">
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalTeams" (click)="confirmacionTeams()">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/phone-call.png"></a>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalStatus">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/calendar.png"></a>
+                                                                <div style="padding: 7px 10px 0px 0px;">
+                                                                    <img style="width: 20px; height: 20px;" [src]="status_user(item.status.booleanValue)"> </div>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalCalendar" (click)="prepUpdateUser(item,true)">
+                                                                    <img class="icon-sidenav-item" src="../../../assets/img/eye-close.png"></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--HO ACUMULADO-->
+                                <div class="card">
+                                    <div class="card-header small" id="i">
+                                        <a class="btn btn-linkk" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <img src="../../assets/img/generic/chev_down_dark.svg" class="align-middle mr-2">
+                                            <b>HO Acumulado</b>
+                                        </a>
+                                        <br>
+                                        <td>
+                                            <span style="font-size: 14px;" class="medium gray">Nombre del responsable: </span>
+                                            <span style="font-size: 14px;" class="medium main">{{area?.responsable_Name }}</span>
+                                        </td>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="i" data-parent="#accordionHO">
+                                        <table class="table table-bordered letra table-responsive table-hover">
+                                            <tbody>
+                                                <tr *ngFor="let item of area?.usuarios | userSearch:filterUser row">
+                                                    <td class="col-sm-6"><img src="../../../../assets/img/generic/chev_right.svg">{{item.name.stringValue}} {{item.apellidoMaterno.stringValue}} {{item.apellidoPaterno.stringValue}}</td>
+                                                    <td class="col-sm-1">{{item.email.stringValue}}</td>
+                                                    <td class="col-sm-1">{{item.idempleado.integerValue}}</td>
+                                                    <td class="col-sm-4">
+                                                        <div class="d-flex justify-content-end">
+                                                            <a class="btn" data-toggle="modal" data-target="#ModalTeams" (click)="confirmacionTeams()">
+                                                                <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/phone-call.png"></a>
+                                                            <a class="btn" data-toggle="modal" data-target="#ModalStatus">
+                                                                <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/calendar.png"></a>
+                                                            <div style="padding: 7px 10px 0px 0px;">
+                                                                <img style="width: 20px; height: 20px;" [src]="status_user(item.status.booleanValue)"> </div>
+                                                            <a class="btn" data-toggle="modal" data-target="#ModalCalendar" (click)="prepUpdateUser(item,true)">
+                                                                <img class="icon-sidenav-item" src="../../../assets/img/eye-close.png"></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!--HO Dirección-->
+                                <div class="card">
+                                    <div class="card-header small" id="i">
+                                        <a class="btn btn-linkk" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseOne">
+                                            <img src="../../assets/img/generic/chev_down_dark.svg" class="align-middle mr-2">
+                                            <b>HO Dirección</b>
+                                        </a>
+                                        <br>
+                                        <td>
+                                            <span style="font-size: 14px;" class="medium gray">Nombre del responsable: </span>
+                                            <span style="font-size: 14px;" class="medium main">{{area?.responsable_Name }}</span>
+                                        </td>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="i" data-parent="#accordionHO">
+                                        <div class="card-body">
+                                            <table class="table table-bordered letra table-responsive table-hover">
+                                                <tbody>
+                                                    <tr *ngFor="let item of area?.usuarios | userSearch:filterUser row">
+                                                        <td class="col-sm-6"><img src="../../../../assets/img/generic/chev_right.svg">{{item.name.stringValue}} {{item.apellidoMaterno.stringValue}} {{item.apellidoPaterno.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.email.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.idempleado.integerValue}}</td>
+                                                        <td class="col-sm-4">
+                                                            <div class="d-flex justify-content-end">
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalTeams" (click)="confirmacionTeams()">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/phone-call.png"></a>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalStatus">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/calendar.png"></a>
+                                                                <div style="padding: 7px 10px 0px 0px;">
+                                                                    <img style="width: 20px; height: 20px;" [src]="status_user(item.status.booleanValue)"> </div>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalCalendar" (click)="prepUpdateUser(item,true)">
+                                                                    <img class="icon-sidenav-item" src="../../../assets/img/eye-close.png"></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--HO Proyecto-->
+                                <div class="card">
+                                    <div class="card-header small" id="i">
+                                        <a class="btn btn-linkk" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseOne">
+                                            <img src="../../assets/img/generic/chev_down_dark.svg" class="align-middle mr-2">
+                                            <b>HO Proyecto</b>
+                                        </a>
+                                        <br>
+                                        <td>
+                                            <span style="font-size: 14px;" class="medium gray">Nombre del responsable: </span>
+                                            <span style="font-size: 14px;" class="medium main">{{area?.responsable_Name }}</span>
+                                        </td>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="i" data-parent="#accordionHO">
+                                        <div class="card-body">
+                                            <table class="table table-bordered letra table-responsive table-hover">
+                                                <tbody>
+                                                    <tr *ngFor="let item of area?.usuarios | userSearch:filterUser row">
+                                                        <td class="col-sm-6"><img src="../../../../assets/img/generic/chev_right.svg">{{item.name.stringValue}} {{item.apellidoMaterno.stringValue}} {{item.apellidoPaterno.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.email.stringValue}}</td>
+                                                        <td class="col-sm-1">{{item.idempleado.integerValue}}</td>
+                                                        <td class="col-sm-4">
+                                                            <div class="d-flex justify-content-end">
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalTeams" (click)="confirmacionTeams()">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/phone-call.png"></a>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalStatus">
+                                                                    <img class="icon-sidenav-item" style="width: 20px; height: 20px" src="../../../assets/img/calendar.png"></a>
+                                                                <div style="padding: 7px 10px 0px 0px;">
+                                                                    <img style="width: 20px; height: 20px;" [src]="status_user(item.status.booleanValue)"> </div>
+                                                                <a class="btn" data-toggle="modal" data-target="#ModalCalendar" (click)="prepUpdateUser(item,true)">
+                                                                    <img class="icon-sidenav-item" src="../../../assets/img/eye-close.png"></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                        <ng-template ngbNavContent>
+                            <app-calendario-reportes></app-calendario-reportes>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+
+        </div>
+    </div>
+    <app-spinner></app-spinner>
+</div>
+
+
+<!--Modal Editar usuario-->
+<div class="modal fade" id="ModalEditarUser" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Editar usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="padding: 5%; border: 1px solid #cecccccf;">
+                    <form class="tamaño-letra needs-validation" novalidate>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Nombre:</label>
+                            <div class="col-sm-9">
+                                <input type="text" [(ngModel)]="itemnamec" name="name" class="form-control tamaño-letra1" id="inputNombre" placeholder="Ingresa el nombre completo" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-3 col-form-label">Email:</label>
+                            <div class="col-sm-9">
+                                <input type="email" [(ngModel)]="itemupdate" name="email" class="form-control tamaño-letra1" id="inputEmail3" placeholder="nombre@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputId_empleado" class="col-sm-3 col-form-label">Id_Empleado:</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="idempleado" [(ngModel)]="itemupdate_idempleado" class="form-control tamaño-letra1" placeholder="Ingresa el id del empleado">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputId_empleado" class="col-sm-3 col-form-label">Tipo de empleado:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control  tamaño-letra1" id="inputId_empleado" placeholder="Ingresa el id del empleado">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputStatus" class="col-sm-3 col-form-label">Estatus:</label>
+                            <div class="col-sm-9" style="padding:0px 0px 0px 15px">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label  tamaño-letra1" for="inlineRadio1">Home office</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label  tamaño-letra1" for="inlineRadio2">Sitio</label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal de Reporte Semanal-->
+<div class="modal left fade modal fullscreen-modal" id="ModalStatus" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="false" data-keyboard="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content ModalStatus">
+            <div class="modal-header">
+                <b class="titleStatus text-center">Historico de la semana</b>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="margin-right: 15px; margin-left: 15px;">
+                    <table class="table" style="font-size: 10px;">
+                        <thead>
+                            <tr class="bg-light">
+                                <th scope="col">#</th>
+                                <th scope="col">Inicio de conexión</th>
+                                <th scope="col">Termino de conexión</th>
+                                <th scope="col">Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>17/01/2022 10:48</td>
+                                <td>17/01/2022 10:57</td>
+                                <td>00:09:10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal  de detalles-->
+<div class="modal left fade modal fullscreen-modal" id="ModalCalendar" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true" data-backdrop="false" data-keyboard="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalLabel"><b>
+          <input type="text" readonly class="form-control-plaintext" name="name" [(ngModel)]="itemnamec">
+        </b></h6>
+                <a data-dismiss="modal">
+                    <img class="js-show-details" src="../../../../assets/img/generic/tab.svg">
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <table class="table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="7" class="btn-primary">
+                                        <span class="btn-group">
+                          <a class="btn"><i class="icon-chevron-left"></i></a>
+                        <a class="btn active justify-content-center" style="font-size: 25px; color:white;"><b>{{mon}} {{year}}</b></a>
+                        <a class="btn"><i class="icon-chevron-right"></i></a>
+                      </span>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>Dom</th>
+                                    <th>Lun</th>
+                                    <th>Mar</th>
+                                    <th>Mie</th>
+                                    <th>Jue</th>
+                                    <th>Vie</th>
+                                    <th>Sab</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="btn-primary" *ngIf="item_fechas1==true; else fecha1">1</td>
+                                    <ng-template #fecha1>
+                                        <td>1</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas2==true; else fecha2">2</td>
+                                    <ng-template #fecha2>
+                                        <td>2</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas3==true; else fecha3">3</td>
+                                    <ng-template #fecha3>
+                                        <td>3</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas4==true; else fecha4">4</td>
+                                    <ng-template #fecha4>
+                                        <td>4</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas5==true; else fecha5">5</td>
+                                    <ng-template #fecha5>
+                                        <td>5</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas6==true; else fecha6">6</td>
+                                    <ng-template #fecha6>
+                                        <td>6</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas7==true; else fecha7">7</td>
+                                    <ng-template #fecha7>
+                                        <td>7</td>
+                                    </ng-template>
+                                </tr>
+                                <tr>
+                                    <td class="btn-primary" *ngIf="item_fechas8==true; else fecha8">8</td>
+                                    <ng-template #fecha8>
+                                        <td>8</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas9==true; else fecha9">9</td>
+                                    <ng-template #fecha9>
+                                        <td>9</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas10==true; else fecha10">10</td>
+                                    <ng-template #fecha10>
+                                        <td>10</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas11==true; else fecha11">11</td>
+                                    <ng-template #fecha11>
+                                        <td>11</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas12==true; else fecha12">12</td>
+                                    <ng-template #fecha12>
+                                        <td>12</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas13==true; else fecha13">13</td>
+                                    <ng-template #fecha13>
+                                        <td>13</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas14==true; else fecha14">14</td>
+                                    <ng-template #fecha14>
+                                        <td>14</td>
+                                    </ng-template>
+                                </tr>
+                                <tr>
+                                    <td class="btn-primary" *ngIf="item_fechas15==true; else fecha15">15</td>
+                                    <ng-template #fecha15>
+                                        <td>15</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas16==true; else fecha16">16</td>
+                                    <ng-template #fecha16>
+                                        <td>16</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas17==true; else fecha17">17</td>
+                                    <ng-template #fecha17>
+                                        <td>17</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas18==true; else fecha18">18</td>
+                                    <ng-template #fecha18>
+                                        <td>18</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas19==true; else fecha19">19</td>
+                                    <ng-template #fecha19>
+                                        <td>19</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas20==true; else fecha20">20</td>
+                                    <ng-template #fecha20>
+                                        <td>20</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas21==true; else fecha21">21</td>
+                                    <ng-template #fecha21>
+                                        <td>21</td>
+                                    </ng-template>
+                                </tr>
+                                <tr>
+                                    <td class="btn-primary" *ngIf="item_fechas22==true; else fecha22">22</td>
+                                    <ng-template #fecha22>
+                                        <td>22</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas23==true; else fecha23">23</td>
+                                    <ng-template #fecha23>
+                                        <td>23</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas24==true; else fecha24">24</td>
+                                    <ng-template #fecha24>
+                                        <td>24</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas25==true; else fecha25">25</td>
+                                    <ng-template #fecha25>
+                                        <td>25</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas26==true; else fecha26">26</td>
+                                    <ng-template #fecha26>
+                                        <td>26</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas27==true; else fecha27">27</td>
+                                    <ng-template #fecha27>
+                                        <td>27</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas28==true; else fecha28">28</td>
+                                    <ng-template #fecha28>
+                                        <td>28</td>
+                                    </ng-template>
+                                </tr>
+                                <tr>
+                                    <td class="btn-primary" *ngIf="item_fechas29==true; else fecha29">29</td>
+                                    <ng-template #fecha29>
+                                        <td>29</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas30==true; else fecha30">30</td>
+                                    <ng-template #fecha30>
+                                        <td>30</td>
+                                    </ng-template>
+                                    <td class="btn-primary" *ngIf="item_fechas31==true; else fecha31">31</td>
+                                    <ng-template #fecha31>
+                                        <td>31</td>
+                                    </ng-template>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-4" style="font-size: 10px;">
+                        <b>Dias Asignados</b>
+                        <br>
+                        <br>
+                        <p *ngIf="item_fechas1==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">1 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas2==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">2 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas3==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">3 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas4==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">4 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas5==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">5 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas6==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">6 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas7==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">7 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas8==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">8 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas9==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">9 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas10==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">10 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas11==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">11 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas12==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">12 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas13==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">13 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas14==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">14 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas15==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">15 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas16==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">16 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas17==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">17 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas18==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">18 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas19==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">19 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas20==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">20 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas21==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">21 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas22==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">22 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas23==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">23 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas24==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">24 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas25==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">25 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas26==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">26 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas27==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">27 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas28==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">28 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas29==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">29 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas30==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">30 {{mon}} de {{year}}</p>
+                        <p *ngIf="item_fechas30==true"> <img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg">31 {{mon}} de {{year}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

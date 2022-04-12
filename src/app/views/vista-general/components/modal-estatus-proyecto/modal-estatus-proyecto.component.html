@@ -1,0 +1,137 @@
+<ng-template #contenido let-modal>
+    <div class="modal-content border-0 px-2">
+        <div class="modal-header border-0">
+            <div class="col-5">
+                <h5 class="modal-title semibold main" id="modalEstatusProyectoLabel">Estatus del Proyecto</h5>
+            </div>
+            <div class="col-6 text-right">
+                <div class="d-inline-block">
+                    <input class="input-search form-control d-inline-block" type="text" placeholder="Buscar">
+                    <img class="icon-search" src="/resources/assets/icons/generales/search.svg">    
+                </div>    
+            </div>
+            <div class="col-1 text-right">
+              <div class="d-inline-block">
+                  <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+                    <span aria-hidden="true"><img src="../../assets/img/generic/close.svg"></span>
+                  </button>
+              </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <table id="tableUltimasActividades" class="table" style="width:100%">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                              <td>
+                               <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/foco_rojo.svg">
+                                        <span class="mr-3 semibold main">Best Fit</span>
+                                        <span class="text-white bg-red small rounded-pill px-2 medium">Foco Rojo</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">           
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/retraso.svg">
+                                        <span class="mr-3 semibold main">Hogar Seguro Print 1</span>
+                                        <span class="text-white bg-orange small rounded-pill px-2 medium">Retraso</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/a_tiempo.svg">
+                                        <span class="mr-3 semibold main">Totalplay Bank</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/a_tiempo.svg">
+                                        <span class="mr-3 semibold main">Nuevo modelo de atenci&oacute;n a clientes</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/a_tiempo.svg">
+                                        <span class="mr-3 semibold main">Venta Consultiva</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/a_tiempo.svg">
+                                        <span class="mr-3 semibold main">Venta Consultiva</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                               <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/foco_rojo.svg">
+                                        <span class="mr-3 semibold main">Best Fit</span>
+                                        <span class="text-white bg-red small rounded-pill px-2 medium">Foco Rojo</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                        
+                                </a>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                    <a href="#" class="col py-3 hover-bg-muted smoth no-link">
+                                        <img class="mr-3" src="/resources/assets/icons/estatus/retraso.svg">
+                                        <span class="mr-3 semibold main">Hogar Seguro Print 1</span>
+                                        <span class="text-white bg-orange small rounded-pill px-2 medium">Retraso</span>
+                                        <span class="gray medium main"> &middot; 26 de febrero 2021 </span>
+                                        <img class="float-right pt-1" src="/resources/assets/icons/generales/chev_right.svg">
+                                    </a>
+                              </td>
+                            </tr>
+                        </tbody>
+                    </table>	          
+                </div>
+            </div>
+        </div>     
+        <div class="modal-footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1">Anterior</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">..</a></li>
+                  <li class="page-item"><a class="page-link" href="#">12</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Siguiente</a>
+                  </li>
+                </ul>
+              </nav>    
+        </div>
+    </div>
+</ng-template>
+<a class="blue semibold" (click)="openLG(contenido)" >Ver todos</a>
+<app-spinner></app-spinner>

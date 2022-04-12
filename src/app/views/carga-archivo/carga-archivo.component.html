@@ -1,0 +1,117 @@
+<div class="container-fluid">
+    <div class="row pr-4">
+        <app-nav isSelectCarga="true"></app-nav>
+        <div class="col bg-white rounded-lg my-4 mr-4 p-4">
+            <header class="row">
+                <div class="col-6">
+                    <h1 class="main h3 semibold m-0"> Carga Archivo </h1>
+                    <p class="main">Hoy es {{day}} de {{mon}} {{year}} </p>
+                </div>
+                <div class="col text-right">
+                    <div class="position-relative d-inline-block" ngbDropdown #menuSearch="ngbDropdown">
+                        <input type="text" class="input-search form-control d-inline-block mr-2" placeholder="Search..." name="filterUser" [(ngModel)]="filterUser">
+                        <img class="icon-search" src="../../../assets/img/generic/search.svg">
+                    </div>
+                    <div class="position-relative d-inline-block ml-1" ngbDropdown>
+                        <img class="hover-b-blue smoth rounded-circle border dropdown-toggle w-30" ngbDropdownToggle id="navbarDropdown2" aria-haspopup="true" aria-expanded="false" src="{{avatarG}}">
+                        <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="js-fade-content position-absolute bg-white p-3 pl-2 zi-1 rounded-lg border b-gray shadow r-0 mt-1 dropdown-menu dropdown-menu-right">
+                            <a ngbDropdownItem href="mis-datos" class="d-block small semibold no-link mb-2 main">Mi Perfil</a>
+                            <!--<a ngbDropdownItem href="organigrama" class="d-block small semibold no-link main">Organigrama</a>-->
+                            <a ngbDropdownItem target="_blanck" href="https://api.whatsapp.com/send?phone=+5215515798000&text=Hola%20necesito%20soporte%20con%20mi%20homeoffice" class="d-block small semibold mb-2 no-link main">Ayuda</a>
+                            <a ngbDropdownItem class="d-block small semibold no-link red" (click)="logout()">Cerrar sesión</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="rounded-lg mt-5" style="min-width: 20px; overflow-x: auto;">
+                <p class="h5 semibold">Archivo historico</p>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="excel_file" lang="es" accept=".xls, .xlsx" (change)="fileUpload($event)" name="fileUpload">
+                    <label class="custom-file-label" for="excel_file">Subir archivo</label>
+                </div>
+                <div *ngIf="mostrarDiv" class="row mb-4 mt-5">
+                    <div class="col"><b>¿Desea cargar {{nameFile}} ?</b></div>
+                    <div class="col text-right">
+                        <button type="button" class="btn btn-primary btn-sm mr-2" (click)="confirmacionJson()">Aceptar</button>
+                    </div>
+                </div>
+                <div id="excel_data" *ngIf="mostrarDiv" style="width: 100px;">
+                    <table class="table table-striped">
+                        <thead style="font-size: 10px;">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>No. de Empleado</th>
+                                <th>Correo</th>
+                                <th>Dirección</th>
+                                <th>Área</th>
+                                <th>Perfil</th>
+                                <th>Director Responsable</th>
+                                <th>VPN</th>
+                                <th>Ambiente Desarrollo</th>
+                                <th>Ambiente QA</th>
+                                <th>Planview</th>
+                                <th>GSuite</th>
+                                <th>Mes</th>
+                                <th>Año</th>
+                                <th>Dìa</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 10px;">
+                            <tr *ngFor="let i of tableExcel">
+                                <td>{{ i.Nombre }}</td>
+                                <td>{{ i.NodeEmpleado }}</td>
+                                <td>{{ i.Correo }}</td>
+                                <td>{{ i.Direccion }}</td>
+                                <td>{{ i.Area }}</td>
+                                <td>{{ i.Perfil }}</td>
+                                <td>{{ i.DirectorResponsable }}</td>
+                                <td>{{ i.VPN }}</td>
+                                <td>{{ i.AmbienteDesarrollo }}</td>
+                                <td>{{ i.mes }}</td>
+                                <td>{{ i.anio }}</td>
+                                <td>{{ i.dia }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="rounded-lg mt-5" style="min-width: 20px; overflow-x: auto;">
+                <p class="h5 semibold">Archivo historico VPN</p>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="excel_fileVPN" lang="es" accept=".xls, .xlsx" (change)="fileUploadVPN($event)" name="fileUploadVPN">
+                    <label class="custom-file-label" for="excel_fileVPN">Subir archivo</label>
+                </div>
+                <div id="excel_dataVPN" class="mt-5" *ngIf="mostrarDivVPN">
+                    <div class="row mb-4">
+                        <div class="col"><b>¿Desea cargar {{nameFileVPN}} ?</b></div>
+                        <div class="col text-right">
+                            <button type="button" class="btn btn-primary btn-sm mr-2" (click)="confirmacionJsonVPN()">Aceptar</button>
+                        </div>
+                    </div>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Fecha </th>
+                                <th>Inicio de Conexión</th>
+                                <th>Termino de Conexión</th>
+                                <th>Duración</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 10px;">
+                            <tr *ngFor="let i of tableExcelVPN">
+                                <th>{{ i.fecha }}</th>
+                                <td>{{ i.inicio }}</td>
+                                <td>{{ i.fin }}</td>
+                                <td>{{ i.duracion }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

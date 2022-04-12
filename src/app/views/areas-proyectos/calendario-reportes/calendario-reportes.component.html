@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row mb-3">
+        <div class="col-8">
+            <div class="row text-center">
+                <div class="col-md-4">
+                <div class="btn-group">
+                    <div
+                    class="btn btn-primary"
+                    mwlCalendarPreviousView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                    Previo
+                    </div>
+                    <div
+                    class="btn btn-outline-secondary"
+                    mwlCalendarToday
+                    [(viewDate)]="viewDate"
+                    >
+                    Hoy
+                    </div>
+                    <div
+                    class="btn btn-primary"
+                    mwlCalendarNextView
+                    [view]="view"
+                    [(viewDate)]="viewDate"
+                    (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                    Siguiente
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <div class="js-cal-prev btn btn-default color-blue" style="color: #509aff;" mwlCalendarPreviousView
+                      [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                      &#10094;
+                    </div>
+                    <div class="btn btn-light" mwlCalendarToday [(viewDate)]="viewDate">
+                      <h6>{{ viewDate | calendarDate:(view + 'ViewTitle'):'Es' }}</h6>
+                    </div>
+                    <div class="js-cal-next btn btn-default color-blue" style="color: #509aff;" mwlCalendarNextView
+                      [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                      &#10095;
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <br />
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view
+                *ngSwitchCase="CalendarView.Month"
+                [viewDate]="viewDate"
+                [events]="events"
+                [refresh]="refresh"
+                [activeDayIsOpen]="activeDayIsOpen"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="handleEvent('Clicked', $event.event)"
+                (eventTimesChanged)="eventTimesChanged($event)"  
+                >
+                </mwl-calendar-month-view>
+            </div>
+            <br /><br /><br />
+            </div>
+
+        <div class="col-4">
+            <div class="container border border-light">       
+                <h6>
+                   <b>Personas asignadas</b>
+                    <hr>         
+                    <div class="clearfix"></div>
+                </h6>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">  
+                    <tbody>
+                        <tr *ngFor="let event of events">
+                        <td>
+                            <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="event.title"
+                            (keyup)="refresh.next()"
+                            readonly class="form-control-plaintext"
+                            />
+                        </td>
+                        <td>
+                            <button class="btn" (click)="deleteEvent(event)">
+                                <img src="../../../../assets/img/calendar/delete_black_24dp.svg">
+                            </button>
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <form>
+                    <div class="form-group row" style="padding: 15vh 10px 0px 0px;">
+                       <div class="col-10">
+                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Añade más personas">
+                       </div>
+                       <div class="col-2" style="padding:2px 0px 0px 10px;">
+                          <button type="button" class="btn btn-success btn-circle" (click)="addEvent()"><img class="icon-sidenav-item" src="../../../assets/img/unidad-compartida/trazado.svg"> </button>
+                       </div>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+        

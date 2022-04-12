@@ -1,0 +1,28 @@
+<header class="row">
+    <div class="col-6">
+        <h1 class="main h3 semibold m-0"> {{name}} </h1>
+        <p class="main">Hoy es {{day}} de {{mon}} {{year}} </p>
+    </div>
+    
+    <div class="col text-right">
+        <div class="position-relative d-inline-block" ngbDropdown #menuSearch="ngbDropdown">
+            <input class="input-search form-control d-inline-block mr-2" spellcheck="false" autocomplete="none" type="text" placeholder="Buscar" [formControl]="search" ngbDropdownToggle id="navbarDropdown1" aria-haspopup="false" aria-expanded="false">
+            <img class="icon-search" src="../../../assets/img/generic/search.svg">
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown1" class="input-search-select dropdown-menu">
+                <ng-container *ngFor="let item of boards | search:searchBusqueda | slice:0:5">
+                    <a ngbDropdownItem href="/proyecto-detalle/{{item.id}}" class="input-search-select"> <span class="search-text gray">{{item.title}}</span> <span class="search-text"> &middot; En Proyectos</span></a>
+                </ng-container>
+            </div>
+        </div>
+        <div class="position-relative d-inline-block ml-1" ngbDropdown>
+            <img class="hover-b-blue smoth rounded-circle border dropdown-toggle w-30" ngbDropdownToggle id="navbarDropdown2" aria-haspopup="true" aria-expanded="false" src="{{avatarG}}">
+            <div ngbDropdownMenu aria-labelledby="navbarDropdown2" class="js-fade-content position-absolute bg-white p-3 pl-2 zi-1 rounded-lg border b-gray shadow r-0 mt-1 dropdown-menu dropdown-menu-right">
+                <a ngbDropdownItem href="mis-datos" class="d-block small semibold no-link mb-2 main">Mi Perfil</a>
+                <a ngbDropdownItem href="alta-usuarios" class="d-block small semibold no-link mb-2 main">Alta de usuarios</a>
+                <!--<a ngbDropdownItem href="organigrama" class="d-block small semibold no-link main">Organigrama</a>-->
+                <a ngbDropdownItem target="_blanck" href="https://api.whatsapp.com/send?phone=+5215515798000&text=Hola%20necesito%20soporte%20con%20mi%20homeoffice" class="d-block small semibold mb-2 no-link main">Ayuda</a>
+                <a ngbDropdownItem class="d-block small semibold no-link red" (click)="logout()">Cerrar sesión</a>
+            </div>								
+        </div>
+    </div>
+</header>

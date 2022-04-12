@@ -1,0 +1,41 @@
+<nav class="sidenav col-12 h-100vh position-relative">
+    <div class="text-center py-4">
+        <img class="js-nav-desc" src="../../../assets/img/totalplay/icono.svg">
+        <img class="js-nav-desc w-125px collapse" id="navbarToggleExternalContent" src="../../../assets/img/totalplay/totalplay1.png">
+    </div>
+    <div class="text-right icon-nav-collapse smoth mr-n3">
+        <svg class="js-collapse-nav" data-toggle="collapse" data-target="#navbarToggleExternalContent" width="29.672" height="51.287" viewBox="0 0 29.672 51.287">
+            <path d="M13.487,2.561c7.544,0,16.185-9.9,16.185-9.9V43.943s-9.342-11.71-16.185-11.71C.679,32.233,0,26.194,0,18.746v-2.7C0,8.6.96,2.561,13.487,2.561Z" transform="translate(0 7.343)" fill="#fff"/>
+            <g class="js-icon-nav smoth" transform="translate(4.878 16.441)">
+                <line x1="4" y1="6" transform="translate(10.794 9.163)" fill="none" stroke="#1c1f36" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <line x2="4" y2="6" transform="translate(4.794 9.163)" fill="none" stroke="#1c1f36" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <line x1="4" y2="6" transform="translate(10.794 3.163)" fill="none" stroke="#1c1f36" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <line y1="6" x2="4" transform="translate(4.794 3.163)" fill="none" stroke="#1c1f36" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+            </g>
+        </svg>
+    </div>
+    <a href="/vista-general" class="sidenav-item no-link d-block position-relative px-3 py-4" [ngClass]="isSelectGeneral ? 'component-active':''">
+        <img class="icon-sidenav-item" src="../../../assets/img/module/vista_general.svg">
+        <span class="js-nav-desc ml-2 medium main collapse" id="navbarToggleExternalContent">Vista General </span>
+    </a>
+    <a href="/proyectos" class="sidenav-item no-link d-block position-relative px-3 py-4" [ngClass]="isSelectProyectos ? 'component-active':''">
+        <img class="icon-sidenav-item" src="../../../assets/img/module/proyectos.svg">
+        <span class="js-nav-desc ml-2 medium main collapse" id="navbarToggleExternalContent">Proyectos <span class="badge badge-danger"><font color="white">{{totalRecords}}</font></span></span>
+    </a>
+    <a href="/tareas" class="sidenav-item no-link d-block position-relative px-3 py-4" [ngClass]="isSelectTareas ? 'component-active':''">
+        <img class="icon-sidenav-item" src="../../../assets/img/module/tareas.svg">
+        <span class="js-nav-desc ml-2 medium main collapse" id="navbarToggleExternalContent">Tareas <span class="badge badge-danger"><font color="white">{{arraytask}}</font></span></span>
+    </a>
+    <div>
+        <a href="/areas-proyectos" class="sidenav-item no-link d-block position-relative px-3 py-4" [ngClass]="isSelectAreas ? 'component-active':''">
+            <img class="icon-sidenav-item" src="../../../assets/img/module/tareas.svg">
+            <span class="js-nav-desc ml-2 medium main collapse" id="navbarToggleExternalContent">Reportes</span>
+        </a>
+    </div>
+    <div>
+        <a href="/carga-archivo" class="sidenav-item no-link d-block position-relative px-3 py-4" [ngClass]="isSelectCarga ? 'component-active':''">
+            <img class="icon-sidenav-item csv-icon" src="../../../assets/img/module/csv-icon.svg">
+            <span class="js-nav-desc ml-2 medium main collapse" id="navbarToggleExternalContent">Carga archivo</span>
+        </a>
+    </div>
+</nav>

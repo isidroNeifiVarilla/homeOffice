@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row pr-4">
+    <app-nav isSelectGeneral="true"></app-nav>
+    <div class="col bg-white rounded-lg my-4 mr-4 p-4">
+      <app-header name="Vista General">
+      </app-header>
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+             <div class="carousel-item active">
+              <a href="https://sites.google.com/view/bienestar-totalplay/torre/plaza-totalplay"><img class="d-block w-100" src="../../../assets/img/banner-asesoria-finaciera.svg"  style="height: 100px;" alt="First slide"></a>
+            </div>
+            <div class="carousel-item collapse" id="navbarToggleExternalContent">
+             <a href="https://sites.google.com/view/bienestar-totalplay/torre/plaza-totalplay"><img class="d-block w-100" src="../../../assets/img/banner-consejeria-nutricional.svg" style="height: 100px;" alt="Second slide"></a> 
+            </div>
+            <div class="carousel-item collapse" id="navbarToggleExternalContent">
+              <a href="https://sites.google.com/view/bienestar-totalplay/torre/plaza-totalplay"><img class="d-block w-100" src="../../../assets/img/banner-dona-sangre.svg" style="height: 100px;" alt="Second slide"></a>
+            </div>
+            </div>
+          </div>
+          <br>
+          <div class="b-gray rounded-lg px-2 mb-4">
+            <div class="row m-0 py-4">
+              <div class="col br-gray">
+                <p class="semibold blue h3">{{totalRecords}}</p>
+                <p class="semibold main m-0">Proyectos abiertos</p>
+                <p class="medium main mb-0 small">Para atenci&oacute;n</p>
+              </div>	
+              <div class="col br-gray">
+                <p class="semibold blue h3">{{arraytask}}</p>
+                <p class="semibold main m-0">Mis proyectos</p>
+                <p class="medium main mb-0 small">En los que participo</p>
+              </div>	
+              <div class="col">
+                <p class="semibold blue h3">{{arraytaskProcess}}</p>
+                <p class="semibold main m-0">Tareas en proceso</p>
+                <p class="medium main mb-0 small"></p>
+              </div>				
+            </div>
+          </div>
+          <div class="b-gray rounded-lg px-2 mb-4">
+            <div class="row m-0 pt-2 pb-1 bb-gray">
+              <div class="col-8">
+                <p class="h5 semibold">Listado de Proyectos</p>
+              </div>	
+              <div class="col-4 text-right">   <a class="nav-link" href="/proyectos"><b>Ver todos</b></a>
+              </div>	
+            </div>
+            <div class="w-100 overflow-auto h-35vh">
+              <ng-container *ngFor="let item of boards ; let i = index">   
+                <ng-container *ngIf="i <= 10">
+                  <div class="row m-0 py-2 bb-gray">
+                    <a href="/proyectos" class="col py-3 hover-bg-muted smoth no-link">
+                      <span class="mr-3 semibold main">{{item.title}}</span>
+                      <img class="float-right pt-1" data-id="id" src="../../../assets/img/generic/chev_right.svg">
+                    </a>
+                  </div>
+                </ng-container>              
+              </ng-container>
+            </div>
+          </div>
+        </div> <!-- /col-8 -->
+        <div class="col-12 col-md-4 pl-0" style="position: initial;">
+          <div class="b-gray rounded-lg px-2 mb-4">
+            <div class="row m-0 py-3 bb-gray">
+              <div class="col p-0 mb-2">
+                <span class="h6 semibold main">&Uacute;ltimas actividades</span>
+              </div>
+            </div>
+            <div class="row m-0 py-3 bb-gray">
+              <div class="">
+                        <table class="table">
+                          <tbody>
+                            <tr *ngFor="let task of tasks ; let i = index">
+                              <td *ngIf="i <= 5"><img class="p-1" src="../../assets/img/activity/proyecto_finalizado.svg"></td>
+                              <td style="font-size: 12px;" *ngIf="i <= 5"><p>{{task.title}}</p></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                  </div>
+                </div>         
+          </div>
+        </div> <!-- /col-4 -->
+      </div>
+    </div>
+  </div>
+ <app-spinner></app-spinner>
+</div>
+<app-chat-button></app-chat-button>
