@@ -94,6 +94,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>id</th>
                                 <th>Fecha </th>
                                 <th>Inicio de Conexión</th>
                                 <th>Termino de Conexión</th>
@@ -102,7 +103,8 @@
                         </thead>
                         <tbody style="font-size: 10px;">
                             <tr *ngFor="let i of tableExcelVPN">
-                                <th>{{ i.fecha }}</th>
+                                <th>{{ i.id }}</th>
+                                <td>{{ i.fecha }}</td>
                                 <td>{{ i.inicio }}</td>
                                 <td>{{ i.fin }}</td>
                                 <td>{{ i.duracion }}</td>
