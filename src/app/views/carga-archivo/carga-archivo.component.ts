@@ -276,11 +276,14 @@ export class CargaArchivoComponent implements OnInit {
         this.tableExcel = this.dataHO;
         this.mostrarDiv = true;
 
-        console.log(this.groupJSON(this.dataHO,'NodeEmpleado',['Nombre']));
+        // console.log(this.groupJSON(this.dataHO,'NodeEmpleado',['Nombre']));
       })
     }
   }
   confirmacionJson() {
+    var TableHO = document.getElementById("tableHO");
+    TableHO.innerHTML = "";
+    this.mostrarDiv = false;
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -312,35 +315,17 @@ export class CargaArchivoComponent implements OnInit {
         this.tableExcelVPN = this.dataVPN;
         this.mostrarDivVPN = true;
 
-        console.log(this.groupJSON(this.dataVPN,'id',['ID']));
+        // console.log(this.groupJSON(this.dataVPN,'id',['ID']));
       })
     }
   }
 
-  groupJSON(data,property, extra = []) {
-    let output = []
-    data.forEach(item => {
-      const indexOfItem = output.length > 0 ? output.findIndex(outputItem => outputItem[property] === item[property]) : -1
-      if (indexOfItem === -1) {
-        let tempOutput = {}
-        extra.forEach(key => {
-          if (item[key]) { tempOutput[key] = item[key] }
-        })
-        let { [property]: propertyValue, ...rest } = item;
-        output.push({ [property]: propertyValue, ...tempOutput, products: [{ ...rest }] })
-      }
-      else {
-        let { [property]: propertyValue, ...rest } = item;
-        output[indexOfItem].products.push({ ...rest })
-      }
-    })
-    return output;
-  }
-
-
 
 
   confirmacionJsonVPN() {
+    var TableHO = document.getElementById("tableVPN");
+    TableHO.innerHTML = "";
+    this.mostrarDivVPN = false;
     Swal.fire({
       position: 'center',
       icon: 'success',
